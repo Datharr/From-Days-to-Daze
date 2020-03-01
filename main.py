@@ -6,6 +6,7 @@ from config import *                                              #Importation d
 from init_card import *
 from init_person import *
 
+#Commentaire feature-mathieu
 def display_text(win, text, positionX, positionY, size,R,G,B):    #Fonction texte
     font = pygame.font.SysFont("arial", size)                     #Police et taille
     font.set_bold(True)                                   
