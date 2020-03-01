@@ -287,12 +287,62 @@ def perso_choice():
             pygame.display.flip()
             check_input_exit()
 
+def menu_return(b,mouse_pos):
+    actual_screen = pygame.image.load("images/interface/Screen2.jpg").convert()  
+    actual_screen = pygame.transform.scale(actual_screen, (1920, 1080))  
+    while b == 0 :
+        button_leave = pygame.draw.rect(win, (200, 200, 200), (780,  876, 257, 153))
+        button_son = pygame.draw.rect(win, (0, 200, 0), (769,  497, 290, 243))
+        win.blit(actual_screen, (0, 0)) 
+        pygame.display.flip()
+        event = pygame.event.wait()
+        if event.type == pygame.KEYDOWN:                                                         
+            if event.key == pygame.K_ESCAPE:
+                exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = event.pos    
+            if button_son.collidepoint(mouse_pos):
+                print("Son on/off")                      
+            if button_leave.collidepoint(mouse_pos):
+                b = 0
+                return b
+                menu()
+                button_play = pygame.draw.rect(win, (0, 200, 200), (780,  487, 257, 153))
+                
+def menu(b):               #779 640 (bas gauche)  487 (haut gauche) 1036,487 (haut droite) 1036,640
+    actual_screen = pygame.image.load("images/interface/Screen1.jpg").convert()
+    actual_screen = pygame.transform.scale(actual_screen, (1920, 1080))  
+    button_play = pygame.draw.rect(win, (0, 200, 200), (780,  487, 257, 153))
+    button_settings = pygame.draw.rect(win, (0, 200, 0), (780,  680, 257, 153))
+    button_leave = pygame.draw.rect(win, (200, 200, 0), (780,  876, 257, 153))
+    while b == 0:            
+        button_play = pygame.draw.rect(win, (0, 200, 200), (780,  487, 257, 153))               
+        button_settings = pygame.draw.rect(win, (0, 200, 0), (780,  680, 257, 153))
+        button_leave = pygame.draw.rect(win, (200, 200, 0), (780,  876, 257, 153))
+        win.blit(actual_screen, (0, 0)) 
+        pygame.display.flip()
+        event = pygame.event.wait()                                                               #Evenement = attendre
+        if event.type == pygame.KEYDOWN:                                                         
+            if event.key == pygame.K_ESCAPE:
+                exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = event.pos                                                                  #position de la souris = la position ou t'as cliqué 
+            if button_play.collidepoint(mouse_pos): 
+                print ("1")
+                b = 1
+                break
+            if button_settings.collidepoint(mouse_pos):            
+                b = menu_return(b,mouse_pos)
+            if button_leave.collidepoint(mouse_pos):
+                exit()
+        
 if __name__ == "__main__":
     perso_stat = perso_list[0]
     cards_available = cards_list
     game_stat = {"saison": saison_list[0],"compteur_jour": 0}
     pygame.init()
     win = pygame.display.set_mode((Xsize, Ysize), pygame.FULLSCREEN)
+    menu(0)
     perso_stat = perso_choice()
    
     background_img = pygame.image.load("images/interface/background.jpg").convert()
