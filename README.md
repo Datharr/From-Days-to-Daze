@@ -20,3 +20,5 @@ Installation cmd.exe = py -m pip install -U pygame --user
 moviepy :
 MoviePy (full documentation) is a Python library for video editing: cutting, concatenations, title insertions, video compositing (a.k.a. non-linear editing), video ...
 Installation cmd.exe = py -m pip install -U moviepy --user  
+
+Made on Visual Studio Code
